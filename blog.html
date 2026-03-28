@@ -135,12 +135,18 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
         .post-card-image {
-            height: 200px;
+            height: 220px;
             background: linear-gradient(135deg, var(--green-dark), var(--green-light));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
+            overflow: hidden;
+        }
+        .post-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .post-card-content {
             padding: 24px;
@@ -350,10 +356,10 @@
     <div class="category-nav">
         <div class="container">
             <div class="category-pills">
-                <a href="#" class="category-pill community">🏘️ Community</a>
-                <a href="#" class="category-pill programs">📋 Programs</a>
-                <a href="#" class="category-pill recognition">🤝 Recognition</a>
-                <a href="#" class="category-pill leadership">💡 Insights</a>
+                <a href="#" class="category-pill community">Community</a>
+                <a href="#" class="category-pill programs">Programs</a>
+                <a href="#" class="category-pill recognition">Recognition</a>
+                <a href="#" class="category-pill leadership">Insights</a>
             </div>
         </div>
     </div>
@@ -365,13 +371,13 @@
 
                 <!-- Post 1: Mother's Day -->
                 <article class="post-card" id="post-mothers-day">
-                    <div class="post-card-image">🎁</div>
+                    <div class="post-card-image"><img src="images/mothers-day-blessing-baskets.jpg" alt="Mother's Day Blessing Baskets Event - May 2, 2026"></div>
                     <div class="post-card-content">
                         <span class="post-category community">Community Spotlight</span>
                         <h3>This Mother's Day, Detroit Gets 100 Blessing Baskets</h3>
                         <p>We believe in showing up for our communities. Not just with words, but with action. That's why Bring Back the Block is proud to sponsor Empowerment Path Foundation's Mother's Day Blessing Baskets event.</p>
                         <div class="post-meta">
-                            <span>📅 March 2026</span>
+                            <span>March 2026</span>
                             <a href="#full-post-1" class="read-more">Read More →</a>
                         </div>
                     </div>
@@ -385,7 +391,7 @@
                         <h3>Spring 2026: What We're Building</h3>
                         <p>Spring is here and we're not slowing down. Here's what Bring Back the Block has been focused on this quarter, including our expanding Detroit partnership.</p>
                         <div class="post-meta">
-                            <span>📅 March 2026</span>
+                            <span>March 2026</span>
                             <a href="#full-post-2" class="read-more">Read More →</a>
                         </div>
                     </div>
@@ -399,7 +405,7 @@
                         <h3>What "Bringing Back the Block" Actually Means</h3>
                         <p>Let's be clear about something. Bringing back the block isn't about gentrification. It's not about pushing people out to make room for something shinier. It's the opposite.</p>
                         <div class="post-meta">
-                            <span>📅 March 2026</span>
+                            <span>March 2026</span>
                             <a href="#full-post-3" class="read-more">Read More →</a>
                         </div>
                     </div>
@@ -430,9 +436,9 @@
                 <p>Because when we lift up mothers, we lift up entire neighborhoods. That's what bringing back the block really means.</p>
                 
                 <div class="event-details">
-                    <p>📅 May 2, 2026</p>
-                    <p>📍 The Locker Room, 18290 Livernois Ave, Detroit</p>
-                    <p>🎁 Blessing Baskets Assembly and Distribution</p>
+                    <p>May 2, 2026</p>
+                    <p>The Locker Room, 18290 Livernois Ave, Detroit</p>
+                    <p>Blessing Baskets Assembly and Distribution</p>
                 </div>
                 
                 <p>Want to get involved? Reach out to EPF at EmpowermentPathFoundation.org</p>
