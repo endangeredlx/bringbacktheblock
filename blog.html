@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bringing Back the Block Blog - Stories of community impact, program updates, and insights from our mission to revitalize Detroit neighborhoods.">
+    <title>Blog | Bringing Back the Block</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4A945;
+            --gold-dark: #B8922E;
+            --green: #2D5A3D;
+            --green-dark: #1E3D29;
+            --green-light: #3D7A52;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --cream: #FAF8F5;
+            --gray: #6B6B6B;
+            --gray-light: #E8E8E8;
+            --teal: #2D9CDB;
+            --orange: #F2994A;
+            --purple: #9B51E0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--black);
+            line-height: 1.7;
+            background: var(--cream);
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(10px);
+            z-index: 1000; padding: 12px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 55px; width: auto; }
+        .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--black);
+            font-weight: 600; font-size: 0.95rem;
+            letter-spacing: 0.02em; transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--green); }
+        .nav-links a.active { color: var(--green); }
+        .nav-cta {
+            background: var(--gold); color: var(--black);
+            padding: 12px 24px; text-decoration: none;
+            font-weight: 700; font-size: 0.9rem;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .nav-cta:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+        /* Blog Header */
+        .blog-header {
+            padding: 140px 24px 60px;
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, var(--green-light) 100%);
+            text-align: center;
+            color: var(--white);
+        }
+        .blog-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 16px;
+        }
+        .blog-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Category Pills */
+        .category-nav {
+            padding: 30px 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-light);
+        }
+        .category-pills {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .category-pill {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .category-pill.community { background: rgba(45, 156, 219, 0.1); color: var(--teal); border-color: var(--teal); }
+        .category-pill.programs { background: rgba(45, 90, 61, 0.1); color: var(--green); border-color: var(--green); }
+        .category-pill.recognition { background: rgba(242, 153, 74, 0.1); color: var(--orange); border-color: var(--orange); }
+        .category-pill.leadership { background: rgba(155, 81, 224, 0.1); color: var(--purple); border-color: var(--purple); }
+        .category-pill:hover { transform: translateY(-2px); }
+
+        /* Blog Posts Grid */
+        .blog-posts {
+            padding: 60px 0;
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        /* Post Card */
+        .post-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .post-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .post-card-content {
+            padding: 24px;
+        }
+        .post-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+        .post-category.community { background: rgba(45, 156, 219, 0.15); color: var(--teal); }
+        .post-category.programs { background: rgba(45, 90, 61, 0.15); color: var(--green); }
+        .post-category.recognition { background: rgba(242, 153, 74, 0.15); color: var(--orange); }
+        .post-category.leadership { background: rgba(155, 81, 224, 0.15); color: var(--purple); }
+        .post-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--black);
+        }
+        .post-card p {
+            color: var(--gray);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        .read-more {
+            color: var(--green);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s ease;
+        }
+        .read-more:hover { gap: 10px; }
+
+        /* Individual Post Page */
+        .post-full {
+            background: var(--white);
+            max-width: 800px;
+            margin: -40px auto 60px;
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+        .post-full h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--green-dark);
+        }
+        .post-full h3 {
+            font-size: 1.5rem;
+            margin: 32px 0 16px;
+            color: var(--green-dark);
+        }
+        .post-full p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        .post-full .lead {
+            font-size: 1.25rem;
+            color: var(--black);
+            border-left: 4px solid var(--gold);
+            padding-left: 20px;
+            margin: 24px 0;
+        }
+        .event-details {
+            background: var(--cream);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        .event-details p {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--black);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .back-link:hover { gap: 12px; }
+
+        /* Newsletter Signup */
+        .newsletter {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--green-dark), var(--green));
+            text-align: center;
+            color: var(--white);
+        }
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        .newsletter p {
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        .newsletter-form button {
+            background: var(--gold);
+            color: var(--black);
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .newsletter-form button:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 48px 0 24px;
+            text-align: center;
+        }
+        .footer-logo {
+            margin-bottom: 24px;
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 12px;
+        }
+        .footer-links {
+            margin-bottom: 24px;
+        }
+        .footer-links a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 16px;
+        }
+        .copyright {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .posts-grid { grid-template-columns: 1fr; }
+            .post-full { padding: 24px; margin: -20px 16px 40px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/logo.png" alt="Bringing Back the Block">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#mission">Mission</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <header class="blog-header">
+        <div class="container">
+            <h1>Stories from the Block</h1>
+            <p>Community updates, program news, and insights from our mission to revitalize Detroit neighborhoods.</p>
+        </div>
+    </header>
+
+    <!-- Category Navigation -->
+    <div class="category-nav">
+        <div class="container">
+            <div class="category-pills">
+                <a href="#" class="category-pill community">🏘️ Community</a>
+                <a href="#" class="category-pill programs">📋 Programs</a>
+                <a href="#" class="category-pill recognition">🤝 Recognition</a>
+                <a href="#" class="category-pill leadership">💡 Insights</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Posts -->
+    <section class="blog-posts">
+        <div class="container">
+            <div class="posts-grid">
+
+                <!-- Post 1: Mother's Day -->
+                <article class="post-card" id="post-mothers-day">
+                    <div class="post-card-image">🎁</div>
+                    <div class="post-card-content">
+                        <span class="post-category community">Community Spotlight</span>
+                        <h3>This Mother's Day, Detroit Gets 100 Blessing Baskets</h3>
+                        <p>We believe in showing up for our communities. Not just with words, but with action. That's why Bring Back the Block is proud to sponsor Empowerment Path Foundation's Mother's Day Blessing Baskets event.</p>
+                        <div class="post-meta">
+                            <span>📅 March 2026</span>
+                            <a href="#full-post-1" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2: Spring Update -->
+                <article class="post-card" id="post-spring-update">
+                    <div class="post-card-image">🌱</div>
+                    <div class="post-card-content">
+                        <span class="post-category programs">Program Update</span>
+                        <h3>Spring 2026: What We're Building</h3>
+                        <p>Spring is here and we're not slowing down. Here's what Bring Back the Block has been focused on this quarter, including our expanding Detroit partnership.</p>
+                        <div class="post-meta">
+                            <span>📅 March 2026</span>
+                            <a href="#full-post-2" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3: What BBB Means -->
+                <article class="post-card" id="post-what-bbb-means">
+                    <div class="post-card-image">💡</div>
+                    <div class="post-card-content">
+                        <span class="post-category leadership">Thought Leadership</span>
+                        <h3>What "Bringing Back the Block" Actually Means</h3>
+                        <p>Let's be clear about something. Bringing back the block isn't about gentrification. It's not about pushing people out to make room for something shinier. It's the opposite.</p>
+                        <div class="post-meta">
+                            <span>📅 March 2026</span>
+                            <a href="#full-post-3" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Post 1 -->
+    <section id="full-post-1" class="blog-posts" style="background: var(--gray-light);">
+        <div class="container">
+            <article class="post-full">
+                <a href="#post-mothers-day" class="back-link">← Back to all posts</a>
+                <span class="post-category community">Community Spotlight</span>
+                <h2>This Mother's Day, Detroit Gets 100 Blessing Baskets</h2>
+                
+                <p class="lead">We believe in showing up for our communities. Not just with words, but with action.</p>
+                
+                <p>That's why Bring Back the Block is proud to sponsor Empowerment Path Foundation's Mother's Day Blessing Baskets event on May 2nd, 2026 in Detroit.</p>
+                
+                <p><strong>100 mothers. 100 baskets. One powerful message: you are not alone.</strong></p>
+                
+                <p>Tina, founder of EPF, started this initiative because she knows what it's like to struggle as a single parent. The sleepless nights. The hard choices. Wondering if you're doing enough. Her foundation provides real support for real families: housing assistance, job training, financial literacy programs, and community connection.</p>
+                
+                <p>This Mother's Day, we're joining forces with EPF and The Locker Room on Livernois Avenue to make sure 100 Detroit moms feel seen, supported, and celebrated.</p>
+                
+                <p>Because when we lift up mothers, we lift up entire neighborhoods. That's what bringing back the block really means.</p>
+                
+                <div class="event-details">
+                    <p>📅 May 2, 2026</p>
+                    <p>📍 The Locker Room, 18290 Livernois Ave, Detroit</p>
+                    <p>🎁 Blessing Baskets Assembly and Distribution</p>
+                </div>
+                
+                <p>Want to get involved? Reach out to EPF at EmpowermentPathFoundation.org</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Full Post 2 -->
+    <section id="full-post-2" class="blog-posts">
+        <div class="container">
+            <article class="post-full">
+                <a href="#post-spring-update" class="back-link">← Back to all posts</a>
+                <span class="post-category programs">Program Update</span>
+                <h2>Spring 2026: What We're Building</h2>
+                
+                <p class="lead">Spring is here and we're not slowing down.</p>
+                
+                <p>Here's what Bring Back the Block has been focused on this quarter:</p>
+                
+                <h3>Detroit Partnership</h3>
+                <p>We're expanding our presence in Detroit through a new partnership with Empowerment Path Foundation. Our first collaborative project: sponsoring their Mother's Day Blessing Baskets initiative, delivering care packages to 100 single mothers in the community. This is just the beginning.</p>
+                
+                <h3>Community Investment</h3>
+                <p>Every dollar we invest goes directly into the neighborhoods that need it most. We're not interested in surface level fixes. We're here to build lasting infrastructure, create real opportunities, and support the people doing the work on the ground.</p>
+                
+                <h3>Looking Ahead</h3>
+                <p>Summer 2026 will bring new programs, expanded partnerships, and more ways for you to get involved. Stay tuned for announcements about volunteer opportunities and our upcoming community events.</p>
+                
+                <p><strong>The block doesn't rebuild itself. It takes all of us.</strong></p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Full Post 3 -->
+    <section id="full-post-3" class="blog-posts" style="background: var(--gray-light);">
+        <div class="container">
+            <article class="post-full">
+                <a href="#post-what-bbb-means" class="back-link">← Back to all posts</a>
+                <span class="post-category leadership">Thought Leadership</span>
+                <h2>What "Bringing Back the Block" Actually Means</h2>
+                
+                <p class="lead">Let's be clear about something.</p>
+                
+                <p>Bringing back the block isn't about gentrification. It's not about pushing people out to make room for something shinier. It's the opposite.</p>
+                
+                <p>Bringing back the block means investing in the people who are already there. It means supporting single mothers who are working two jobs to keep their families together. It means creating job training programs so young people don't have to leave their neighborhoods to find opportunity. It means building the kind of community infrastructure that makes people want to stay.</p>
+                
+                <p>Too many organizations talk about "revitalizing" communities without ever asking the people who live there what they actually need. We take a different approach. We listen first. We partner with local organizations who have been doing this work for years. We follow their lead.</p>
+                
+                <p>The communities we serve don't need saviors. They need partners. They need resources. They need people who will show up consistently, not just when it's convenient or makes for a good photo op.</p>
+                
+                <p><strong>That's what we're here to do.</strong></p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Join Our Community</h2>
+            <p>Get stories that inspire, delivered to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <p style="font-size: 1.2rem; font-weight: 600;">Bringing Back the Block</p>
+                <p style="opacity: 0.7;">Revitalizing Communities, One Block at a Time</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <p class="copyright">© 2026 Bringing Back the Block. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
